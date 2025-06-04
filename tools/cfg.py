@@ -55,7 +55,12 @@ def py2dict(file_path: Union[str, Path]) -> dict:
     config_dir = str(file_path.parent)
 
     sys.path.insert(0, config_dir)
-
+    import collections.abc
+    import collections
+    collections.MutableMapping = collections.abc.MutableMapping
+    collections.Mapping = collections.abc.Mapping
+    collections.Iterable = collections.abc.Iterable
+    collections.Callable = collections.abc.Callable
     mod = import_module(module_name)
     sys.path.pop(0)
     cfg_dict = {name: value for name, value in mod.__dict__.items() if not name.startswith("__")}

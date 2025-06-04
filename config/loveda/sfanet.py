@@ -1,9 +1,11 @@
+from collections.abc import MutableMapping
 from torch.utils.data import DataLoader
 from network.losses import *
 from network.datasets.loveda_dataset import *
 from network.models.SFANet import SFANet
 from catalyst.contrib.nn import Lookahead
 from catalyst import utils
+
 
 # training hparam
 max_epoch = 45

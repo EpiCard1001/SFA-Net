@@ -83,14 +83,14 @@ def test_aug(img, mask):
 
 
 class LoveDATrainDataset(Dataset):
-    def __init__(self, data_root='data/LoveDA/Train', img_dir='images_png', mosaic_ratio=0.25,
+    def __init__(self, data_root='/kaggle/input/loveda-dataset/Train/Train', img_dir='images_png', mosaic_ratio=0.25,
                  mask_dir='masks_png_convert', img_suffix='.png', mask_suffix='.png',
-                 transform=train_aug, img_size=ORIGIN_IMG_SIZE):
+                 transform=train_aug, img_size=ORIGIN_IMG_SIZE,mask_root ):
         self.data_root = data_root
         self.img_dir = img_dir
         self.mask_dir = mask_dir
         self.mosaic_ratio = mosaic_ratio
-
+        self.mask_root = mask_root
         self.img_suffix = img_suffix
         self.mask_suffix = mask_suffix
         self.transform = transform
@@ -117,12 +117,12 @@ class LoveDATrainDataset(Dataset):
 
     def get_img_ids(self, data_root, img_dir, mask_dir):
         urban_img_filename_list = os.listdir(osp.join(data_root, 'Urban', img_dir))
-        urban_mask_filename_list = os.listdir(osp.join(data_root, 'Urban', mask_dir))
+        urban_mask_filename_list = os.listdir(osp.join(mask_root, 'Urban', mask_dir))
         assert len(urban_img_filename_list) == len(urban_mask_filename_list)
         urban_img_ids = [(str(id.split('.')[0]), 'Urban') for id in urban_img_filename_list]
 
         rural_img_filename_list = os.listdir(osp.join(data_root, 'Rural', img_dir))
-        rural_mask_filename_list = os.listdir(osp.join(data_root, 'Rural', mask_dir))
+        rural_mask_filename_list = os.listdir(osp.join(mask_root, 'Rural', mask_dir))
         assert len(rural_img_filename_list) == len(rural_mask_filename_list)
         rural_img_ids = [(str(id.split('.')[0]), 'Rural') for id in rural_img_filename_list]
         img_ids = urban_img_ids + rural_img_ids
@@ -132,7 +132,7 @@ class LoveDATrainDataset(Dataset):
     def load_img_and_mask(self, index):
         img_id, img_type = self.img_ids[index]
         img_name = osp.join(self.data_root, img_type, self.img_dir, img_id + self.img_suffix)
-        mask_name = osp.join(self.data_root, img_type, self.mask_dir, img_id + self.mask_suffix)
+        mask_name = osp.join(self.mask_root, img_type, self.mask_dir, img_id + self.mask_suffix)
         img = Image.open(img_name).convert('RGB')
         mask = Image.open(mask_name).convert('L')
 
@@ -196,11 +196,11 @@ class LoveDATrainDataset(Dataset):
 
 
 loveda_val_dataset = LoveDATrainDataset(data_root='/kaggle/input/loveda-dataset/Val/Val', mosaic_ratio=0.0,
-                                        transform=val_aug)
+                                        transform=val_aug,mask_root='/kaggle/working/data/LoveDA/Val',)
 
 
 class LoveDATestDataset(Dataset):
-    def __init__(self, data_root='data/LoveDA/Test', img_dir='images_png',
+    def __init__(self, data_root='/kaggle/input/loveda-dataset/Test/Test', img_dir='images_png',
                  img_suffix='.png',  mosaic_ratio=0.0,
                  img_size=ORIGIN_IMG_SIZE):
         self.data_root = data_root

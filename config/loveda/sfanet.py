@@ -60,7 +60,7 @@ def train_aug(img, mask):
     return img, mask
 
 
-train_dataset = LoveDATrainDataset(transform=train_aug, data_root='/kaggle/input/loveda-dataset/Train/Train')
+train_dataset = LoveDATrainDataset(transform=train_aug, data_root='/kaggle/input/loveda-dataset/Train/Train',mask_root = "/kaggle/working/data/LoveDA/Train")
 
 val_dataset = loveda_val_dataset
 

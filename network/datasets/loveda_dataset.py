@@ -85,7 +85,7 @@ def test_aug(img, mask):
 class LoveDATrainDataset(Dataset):
     def __init__(self, data_root='/kaggle/input/loveda-dataset/Train/Train', img_dir='images_png', mosaic_ratio=0.25,
                  mask_dir='masks_png_convert', img_suffix='.png', mask_suffix='.png',
-                 transform=train_aug, img_size=ORIGIN_IMG_SIZE,mask_root ):
+                 transform=train_aug, img_size=ORIGIN_IMG_SIZE,mask_root="/kaggle/working/data/LoveDA/Train" ):
         self.data_root = data_root
         self.img_dir = img_dir
         self.mask_dir = mask_dir

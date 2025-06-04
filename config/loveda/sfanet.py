@@ -31,7 +31,7 @@ check_val_every_n_epoch = 1
 pretrained_ckpt_path = None # the path for the pretrained model weight
 gpus = 'auto'  # default or gpu ids:[0] or gpu nums: 2, more setting can refer to pytorch_lightning
 resume_ckpt_path = None #"model_weights/loveda/delta-0817l0.8lr/delta-0817l0.8lr.ckpt"  # whether continue training with the checkpoint, default None
-strategy = None
+strategy = "ddp"
 
 #  define the network
 net = SFANet(num_classes=num_classes)

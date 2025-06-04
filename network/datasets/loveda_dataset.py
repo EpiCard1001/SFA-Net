@@ -195,7 +195,7 @@ class LoveDATrainDataset(Dataset):
         return img, mask
 
 
-loveda_val_dataset = LoveDATrainDataset(data_root='data/LoveDA/Val', mosaic_ratio=0.0,
+loveda_val_dataset = LoveDATrainDataset(data_root='/kaggle/input/loveda-dataset/Val/Val', mosaic_ratio=0.0,
                                         transform=val_aug)
 
 

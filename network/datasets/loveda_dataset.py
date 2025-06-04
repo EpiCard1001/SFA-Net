@@ -115,7 +115,7 @@ class LoveDATrainDataset(Dataset):
         length = len(self.img_ids)
         return length
 
-    def get_img_ids(self, data_root, img_dir, mask_dir):
+    def get_img_ids(self, data_root, img_dir, mask_dir, mask_root):
         urban_img_filename_list = os.listdir(osp.join(data_root, 'Urban', img_dir))
         urban_mask_filename_list = os.listdir(osp.join(mask_root, 'Urban', mask_dir))
         assert len(urban_img_filename_list) == len(urban_mask_filename_list)

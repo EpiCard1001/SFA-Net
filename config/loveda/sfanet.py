@@ -20,7 +20,7 @@ num_classes = len(CLASSES)
 classes = CLASSES
 
 weights_name = "sfanet"
-weights_path = "model_weights/loveda/{}".format(weights_name)
+weights_path = "/kaggle/input/sfanet_final_ckpt/pytorch/default/1"
 test_weights_name = "sfanet"
 log_name = 'loveda/{}'.format(weights_name)
 monitor = 'val_mIoU'
